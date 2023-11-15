@@ -45,15 +45,6 @@ $posts = $statement->fetchAll();
             </form>
 
         </div>
-       
-        <div class="TextBoxOne">
-            <select name="selectOption" id="selectOption">
-                <option value="">Basketball</option>
-                <option value="">Soccer</option>
-                <option value="">Football</option>
-            </select>
-        </div>
-
         <?php foreach ($posts as $post) :?>
             <div> 
                 <h2>Athlete name: <?php echo $post['athlete_name']; ?></h2>
