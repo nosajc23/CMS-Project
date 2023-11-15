@@ -45,14 +45,6 @@ $posts = $statement->fetchAll();
                 <input type="submit" value="Search" id="search_query">
             </form>
         </div>
-       
-        <div class="TextBoxOne">
-            <select name="sport_category_id" id="sport_category_id" required>
-                <option value="">Basketball</option>
-                <option value="">Soccer</option>
-                <option value="">Football</option>
-            </select>
-        </div>
 
         <?php foreach ($posts as $post) :?>
             <div> 
