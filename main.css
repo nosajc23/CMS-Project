@@ -1,0 +1,79 @@
+
+body {
+    margin: 0;
+    height: 100%;
+    padding: 0;
+}
+
+#header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Style the top navigation bar */
+#TextBoxOne {
+    overflow: hidden;
+    background-color: #333;
+}
+  
+  /* Style the topnav links */
+#TextBoxOne a {
+float: left;
+display: block;
+color: #f2f2f2;
+text-align: center;
+padding: 8px 16px;
+text-decoration: none;
+background-color: #333;
+}
+  
+/* Change color on hover */
+#TextBoxOne a:hover {
+background-color: #ddd;
+color: black;
+}
+
+#input-bio{
+    height: 100px;
+}
+
+.navbar{
+    background-color: #333;
+}
+
+.nav-item{
+    list-style: none;
+}
+
+.btn{
+    background: #333;
+    color: #ddd;
+}
+
+.btn-primary{
+    background:  #337ab7;
+    color:  #ddd;
+}
+
+.bg {
+    /* The image used */
+    background-image: url("Athlete Pro.jpg");
+    height: 100vh; 
+    background-size: cover;
+   
+    background-repeat: no-repeat;
+}
+
+.active{
+    margin: 2px;
+    padding: 0px;
+}
+
+#search_query{
+    margin: 10px;
+    padding: 0px;
+}
+
+
+
