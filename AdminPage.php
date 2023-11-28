@@ -10,7 +10,7 @@
 
 require('connect.php');
 
-$query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM athletes ORDER BY created_at DESC";
+$query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at,image_path FROM athletes ORDER BY created_at DESC";
 $statement = $db->prepare($query);
 $statement->execute();
 $posts = $statement->fetchAll();
@@ -52,6 +52,12 @@ $posts = $statement->fetchAll();
                 <h3>Team: <?php echo $post['team']; ?></h3>
                 <h3>Sports: <?php echo $post['sport']; ?></h3>
                 <h4><p>Bio: <?php echo $post['bio']; ?></p></h4>
+
+                
+                <?php if (!empty($athlete['image_path'])): ?>
+                    <img src="<?php echo $athlete['image_path']; ?>" alt="Athlete Image" width="300">
+                <?php endif; ?>
+
               
                 <div class="post">
                     <p><?php echo date('F d, Y, h:i a', strtotime($post['created_at'])); ?></p>

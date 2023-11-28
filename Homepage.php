@@ -38,6 +38,7 @@ $posts = $statement->fetchAll();
             <a class="active" href="Homepage.php">Home</a>
             <a class="active" href="admin_login.php">Admin Login</a>    
             <a class="active" href="user_login.php">User Login</a> 
+            <a class="active" href="register.php">Register</a> 
         </div>
     
         <div class="bg"></div>

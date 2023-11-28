@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $admin['id'];
         $_SESSION['user_role'] = 'admin';
         header("Location: AdminPage.php");
+        echo"Login was successful!";
         exit();
     } else {
         echo "Invalid credentials for admin login.";

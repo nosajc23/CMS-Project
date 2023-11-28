@@ -13,6 +13,9 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    
+    // Hash the password (you should use password_hash in a real-world scenario)
+   // $hashedPassword = md5($password);
 
     // Check user credentials
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ? AND role = 'user'");

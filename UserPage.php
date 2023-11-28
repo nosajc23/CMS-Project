@@ -10,10 +10,19 @@
 
 require('connect.php');
 
-$query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM athletes ORDER BY created_at DESC";
-$statement = $db->prepare($query);
-$statement->execute();
-$posts = $statement->fetchAll();
+$athlete_query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM athletes ORDER BY created_at DESC";
+$comment_query = "SELECT name, comment, timestamp FROM comments";
+
+$athlete_statement = $db->prepare($athlete_query);
+$athlete_statement->execute();
+$posts = $athlete_statement->fetchAll();
+
+$comment_statement = $db->prepare($comment_query);
+$comment_statement->execute();
+$getComments = $comment_statement->fetchAll();
+//$current_page = basename($_SERVER['PHP_SELF']);
+//$comments = getComments($current_page);
+
 
 ?>
 <!DOCTYPE html>
@@ -56,6 +65,26 @@ $posts = $statement->fetchAll();
                     <p><?php echo date('F d, Y, h:i a', strtotime($post['created_at'])); ?></p>
                 </div>
 
+                <!-- Comment Form -->
+                <form method="post" action="">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" required><br>
+                    
+                    <label for="comment">Comment:</label>
+                    <textarea name="comment" id="comment" rows="4" required></textarea><br>
+
+                    <input type="hidden" name="page" value="<?php echo $current_page; ?>">
+                    
+                    <input type="submit" value="Submit Comment">
+                </form>
+
+                <!-- Display Comments -->
+                    <h2>Comments:</h2>
+                    <?php
+                    foreach($getComments as $comment) :?>
+                       <?php echo "<h4><strong>{$comment['name']}</strong> {$comment['comment']}</h4>";?>
+                    <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
+
     </body>

@@ -44,7 +44,7 @@ $posts = $statement->fetchAll();
 
     <div class = "container">
          <h1>Create Athlete Page</h1>
-        <form action="create_athlete.php" method="POST">
+        <form action="create_athlete.php" method="POST" enctype="multipart/form-data">
             <label for="athlete_name">Athlete Name:</label>
             <input type="text" name="athlete_name" class="form-control" required><br>
             <label for="team">Team:</label>
@@ -54,9 +54,12 @@ $posts = $statement->fetchAll();
             <label for="bio">Bio:</label><br>
             <textarea name="bio" rows="4"  class="form-control" required></textarea>
             <input type="submit"  class="btn btn-primary" value="Create Athlete Page">
+            <br>
+            <br>
+            <label for="image">Choose an image:</label>
+            <input type="file" name="image" id="image">
         </form>
     </div>
    
  </body>
 </html>
-

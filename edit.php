@@ -29,9 +29,17 @@ $post = $statement->fetch();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link
+        href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css"rel="stylesheet"type="text/css"/>
     <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="path/to/tinymce/tinymce.min.js"></script>
+
+    <script>tinymce.init({
+        selector: 'textarea#default-editor'
+        });
+    </script>
     <title>Edit this Post!</title>
 </head>
 <body>
@@ -56,11 +64,24 @@ $post = $statement->fetch();
                 <label for="sport">Sport:</label>
                 <input type="text" name="sport" value="<?php echo $post['sport']; ?>" class="form-control" required><br>
                 <label for="bio">Bio:</label><br>
-                <textarea name="bio" rows="4"  class="form-control" required><?php echo $post['bio']; ?></textarea><br>
+                <textarea id = "myEditor" name="bio" rows="4"  class="form-control" required><?php echo $post['bio']; ?></textarea><br>
                 <input type="hidden" name="id" value="<?php echo $post_id; ?>">
                 <input type="submit" name="update" value="Update Post"  class="btn btn-primary">
-                <input type="submit" name="delete" value="Delete Post"  class="btn btn-danger">
+                <input type="submit" name="delete" value="Delete Post"  class="btn btn-danger" onclick="ConfirmDelete()">
             </form>
     </div>
 </body>
 </html>
+
+<script>
+    function ConfirmDelete()
+    {
+        let result = confirm("Are you sure you want to delete?");
+        if (confirm(result)==true) {
+        return true;
+        } else {
+        return false;
+        }
+    }
+</script>
+
