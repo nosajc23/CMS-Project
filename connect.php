@@ -1,4 +1,11 @@
  <?php
+ /*************** 
+    
+    Name: Jason Castillo    
+    Date: 2023-09-26
+    Description: CMS Project
+
+****************/
      define('DB_DSN','mysql:host=localhost;dbname=serverside;charset=utf8');
      define('DB_USER','serveruser');
      define('DB_PASS','gorgonzola7!');     
