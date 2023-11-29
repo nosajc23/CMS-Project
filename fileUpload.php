@@ -15,10 +15,10 @@
         mkdir($targetDir, 0755, true);
     }
 
-    if (isset($_FILES["fileToUpload"])) {
-        $targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
+    if (isset($_FILES["image_path"])) {
+        $targetFile = $targetDir . basename($_FILES["image_path"]["name"]);
         
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+        if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $targetFile)) {
             echo "File uploaded successfully.";
         } else {
             echo "Error uploading file.";
@@ -31,14 +31,14 @@
         mkdir($targetDir, 0755, true);
     }
 
-    if (isset($_FILES["fileToUpload"])) {
-        $targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
-        $fileType = mime_content_type($_FILES["fileToUpload"]["tmp_name"]);
+    if (isset($_FILES["image_path"])) {
+        $targetFile = $targetDir . basename($_FILES["image_path"]["name"]);
+        $fileType = mime_content_type($_FILES["image_path"]["tmp_name"]);
 
         $allowedTypes = array("image/jpeg", "image/png", "image/gif", "application/pdf");
 
         if (in_array($fileType, $allowedTypes)) {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+            if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $targetFile)) {
                 echo "File uploaded successfully.";
             } else {
                 echo "Error uploading file.";
@@ -57,14 +57,14 @@
         mkdir($targetDir, 0755, true);
     }
 
-    if (isset($_FILES["fileToUpload"])) {
-        $targetFile = $targetDir . basename($_FILES["fileToUpload"]["name"]);
-        $fileType = mime_content_type($_FILES["fileToUpload"]["tmp_name"]);
+    if (isset($_FILES["image_path"])) {
+        $targetFile = $targetDir . basename($_FILES["image_path"]["name"]);
+        $fileType = mime_content_type($_FILES["image_path"]["tmp_name"]);
 
         $allowedTypes = array("image/jpeg", "image/png", "image/gif", "application/pdf");
 
         if (in_array($fileType, $allowedTypes)) {
-            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $targetFile)) {
+            if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $targetFile)) {
                 echo "File uploaded successfully.";
 
                 // Check if it's an image and resize
