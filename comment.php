@@ -1,4 +1,12 @@
 <?php
+/*************** 
+    
+    Name: Jason Castillo    
+    Date: 2023-09-26
+    Description: CMS Project
+
+****************/
+
 $host = 'localhost';
 $dbname = 'serverside';
 $user = 'serveruser';
