@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require("fileUpload.php");
+
 // Database connection
 try {
     $pdo = new PDO('mysql:host=localhost;dbname=serverside', 'serveruser', 'gorgonzola7!');
