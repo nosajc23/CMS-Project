@@ -93,10 +93,7 @@ echo $status;
                 <textarea name="comment" id="comment" required></textarea><br>
 
                 <input type="hidden" name="page" value="<?php echo $current_page; ?>">
-                <input type="submit" value="Submit Comment">
-            </form>
-            <br>
-            <form name="form" method="post" action="">
+               
                 <label><strong>Enter Captcha:</strong></label><br />
                 <input type="text" name="captcha" />
                 <p><br />
@@ -105,8 +102,10 @@ echo $status;
                 <p>Can't read the image?
                 <a href='javascript: refreshCaptcha();'>click here</a>
                 to refresh</p>
-                <input type="submit" name="submit" value="Submit">
+                <input type="submit" value="Submit Comment">
             </form>
+            <br>
+          
 
             <!-- Display Comments -->
             <h2>Comments:</h2>
