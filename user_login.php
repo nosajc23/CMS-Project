@@ -1,3 +1,12 @@
+<?php
+/*************** 
+    
+    Name: Jason Castillo    
+    Date: 2023-09-26
+    Description: CMS Project
+
+****************/
+?>
 <!-- user_login.php -->
 <!DOCTYPE html>
 <html>
