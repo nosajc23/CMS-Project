@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+//directs to user page
 header("Location: UserPage.php");
 // Display comments for the current page
 $current_page = basename($_SERVER['PHP_SELF']);
