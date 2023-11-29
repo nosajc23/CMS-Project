@@ -1,5 +1,4 @@
 
-
 <?php
 session_start();
 //You can customize your captcha settings here
