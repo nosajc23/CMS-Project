@@ -53,12 +53,6 @@ $posts = $statement->fetchAll();
                 <h3>Sports: <?php echo $post['sport']; ?></h3>
                 <h4><p>Bio: <?php echo $post['bio']; ?></p></h4>
 
-                
-                <?php if (!empty($athlete['image_path'])): ?>
-                    <img src="<?php echo $athlete['image_path']; ?>" alt="Athlete Image" width="300">
-                <?php endif; ?>
-
-              
                 <div class="post">
                     <p><?php echo date('F d, Y, h:i a', strtotime($post['created_at'])); ?></p>
                 </div>
@@ -70,3 +64,4 @@ $posts = $statement->fetchAll();
             </div>
         <?php endforeach; ?>
     </body>
+</html>
