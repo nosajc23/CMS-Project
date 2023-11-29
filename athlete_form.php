@@ -56,8 +56,8 @@ $posts = $statement->fetchAll();
             <input type="submit"  class="btn btn-primary" value="Create Athlete Page">
             <br>
             <br>
-            <label for="image">Choose an image:</label>
-            <input type="file" name="image" id="image">
+            <input type="file" name="image_path" accept=".jpg, .png, .gif, .pdf">
+            
         </form>
     </div>
    
