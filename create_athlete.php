@@ -6,7 +6,6 @@
     Description: CMS Project
 
 ****************/
-require("fileUpload.php");
 session_start();
 
 // Database connection
@@ -23,18 +22,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $team = $_POST['team'];
     $sport= $_POST['sport'];
     $bio = $_POST['bio'];
- 
+
+    if($_FILES['image_path']['name'] != null) {
+        // image to be uploaded
+        $image_path= $_POST['image_path']['name'];
+        require("fileUpload.php"); 
+        $stmt = $pdo->prepare("INSERT INTO athletes (athlete_name, team, sport, bio, image_path) VALUES (?, ?, ?, ?,?)");
+        header('Location: AdminPage.php'); // Redirect to the home page
+    
+        if ($stmt->execute([$athlete, $team, $sport, $bio, $image_path])) {
+            $success_message = "Athlete added successfully.";
+        } else {
+            $error_message = "Error adding the athlete.";
+        } 
+        
+    } else {
         // Insert athlete data into the "athletes" table
         $stmt = $pdo->prepare("INSERT INTO athletes (athlete_name, team, sport, bio) VALUES (?, ?, ?, ?)");
-    
         header('Location: AdminPage.php'); // Redirect to the home page
-
+    
         if ($stmt->execute([$athlete, $team, $sport, $bio])) {
             $success_message = "Athlete added successfully.";
         } else {
             $error_message = "Error adding the athlete.";
         } 
-    
+        
+    }
 }
 
     
