@@ -6,6 +6,7 @@
     Description: CMS Project
 
 ****************/
+require("fileUpload.php");
 session_start();
 
 // Database connection
@@ -22,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $team = $_POST['team'];
     $sport= $_POST['sport'];
     $bio = $_POST['bio'];
-    $image_path= $_POST['image_path'];
  
         // Insert athlete data into the "athletes" table
         $stmt = $pdo->prepare("INSERT INTO athletes (athlete_name, team, sport, bio) VALUES (?, ?, ?, ?)");

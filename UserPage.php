@@ -80,32 +80,33 @@ echo $status;
                     <div class="post">
                         <p><?php echo date('F d, Y, h:i a', strtotime($post['created_at'])); ?></p>
                     </div>
+                       <!-- Comment Form -->
+                        <form method="post" action="comment.php">
+                        <label for="name">Name:</label>
+                        <input type="text" name="name" id="name" required><br>
+                        
+                        <label for="comment">Comment:</label>
+                        <textarea name="comment" id="comment" required></textarea><br>
+
+                        <input type="hidden" name="page" value="<?php echo $current_page; ?>">
+                    
+                        <label><strong>Enter Captcha:</strong></label><br />
+                        <input type="text" name="captcha" />
+                        <p><br />
+                        <img src="captcha_image.php?rand=<?php echo rand(); ?>" id='captcha_image'>
+                        </p>
+                        <p>Can't read the image?
+                        <a href='javascript: refreshCaptcha();'>click here</a>
+                        to refresh</p>
+                        <input type="submit" value="Submit Comment">
+                    </form>
+                    <br>
+          
 
                 </div>
             <?php endforeach; ?>
 
-            <!-- Comment Form -->
-            <form method="post" action="comment.php">
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name" required><br>
-                
-                <label for="comment">Comment:</label>
-                <textarea name="comment" id="comment" required></textarea><br>
-
-                <input type="hidden" name="page" value="<?php echo $current_page; ?>">
-               
-                <label><strong>Enter Captcha:</strong></label><br />
-                <input type="text" name="captcha" />
-                <p><br />
-                <img src="captcha_image.php?rand=<?php echo rand(); ?>" id='captcha_image'>
-                </p>
-                <p>Can't read the image?
-                <a href='javascript: refreshCaptcha();'>click here</a>
-                to refresh</p>
-                <input type="submit" value="Submit Comment">
-            </form>
-            <br>
-          
+         
 
             <!-- Display Comments -->
             <h2>Comments:</h2>
