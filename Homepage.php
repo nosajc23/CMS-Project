@@ -10,7 +10,7 @@
 
 require('connect.php');
 
-$query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM athletes ORDER BY created_at DESC";
+$query = "SELECT * FROM new_athletes ORDER BY created_at DESC";
 $statement = $db->prepare($query);
 $statement->execute();
 $posts = $statement->fetchAll();

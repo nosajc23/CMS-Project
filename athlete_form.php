@@ -10,12 +10,10 @@
 
 require('connect.php');
 
-
-$query = "SELECT athlete_id,athlete_name,team,sport,bio FROM athletes";
+$query = "SELECT * FROM sports";
 $statement = $db->prepare($query);
 $statement->execute();
-$posts = $statement->fetchAll();
-
+$sports = $statement->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -47,16 +45,25 @@ $posts = $statement->fetchAll();
         <form action="create_athlete.php" method="POST" enctype="multipart/form-data">
             <label for="athlete_name">Athlete Name:</label>
             <input type="text" name="athlete_name" class="form-control" required><br>
+
             <label for="team">Team:</label>
             <input type="text" name="team" class="form-control" required><br>
-            <label for="sport">Sport:</label>
-            <input type="text" name="sport" class="form-control" required><br>
+
+            <label for="sport">Sport:</label>            
+            <select name="sport" id="sport" class="form-control">
+                <?php
+                    foreach ($sports as $sport) {
+                        echo '<option value="' . $sport['sport_id'] . '">' . $sport['sport_name'] . '</option>';
+                    }
+                ?>
+            </select>
+
             <label for="bio">Bio:</label><br>
-            <textarea name="bio" rows="4"  class="form-control" required></textarea>
+            <textarea name="bio" rows="4" class="form-control" required></textarea> <br>
+           
+            <input type="file" name="image_path" accept=".jpg, .png, .gif, .pdf"><br>
+            
             <input type="submit"  class="btn btn-primary" value="Create Athlete Page">
-            <br>
-            <br>
-            <input type="file" name="image_path" accept=".jpg, .png, .gif, .pdf">
             
         </form>
     </div>

@@ -10,7 +10,7 @@
 
 require('connect.php');
 
-$athlete_query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM athletes ORDER BY created_at DESC";
+$athlete_query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM new_athletes ORDER BY created_at DESC";
 $comment_query = "SELECT name, comment, timestamp FROM comments";
 
 $athlete_statement = $db->prepare($athlete_query);

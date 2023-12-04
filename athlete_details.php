@@ -21,7 +21,7 @@ try {
 if (isset($_GET['athlete_id'])) {
     $athlete_id = $_GET['athlete_id'];
 
-    $stmt = $pdo->prepare("SELECT * FROM athletes WHERE athlete_id = ?");
+    $stmt = $pdo->prepare("SELECT * FROM new_athletes WHERE athlete_id = ?");
     $stmt->execute([$athlete_id]);
     $athlete = $stmt->fetch(PDO::FETCH_ASSOC);
 

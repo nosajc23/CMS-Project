@@ -13,12 +13,16 @@ require('connect.php');
 // Get the Post ID from the URL
 $post_id = $_GET['id']; // Number 4: Get the post ID from the URL
 
-// Retrieve the post data from the database
-$query = "SELECT athlete_name,team,sport,bio FROM athletes WHERE athlete_id = :athlete_id";
+$query = "SELECT * FROM new_athletes WHERE athlete_id = :athlete_id";
 $statement = $db->prepare($query);
 $statement->bindParam(':athlete_id', $post_id, PDO::PARAM_INT);
 $statement->execute();
 $post = $statement->fetch();
+
+$sport_query = "SELECT * FROM sports";
+$sport_statement = $db->prepare($sport_query);
+$sport_statement->execute();
+$sports = $sport_statement->fetchAll();
 
 ?>
 
@@ -59,13 +63,24 @@ $post = $statement->fetch();
             <form action="processeditpost.php" method="post">
                 <label for="athlete_name">Athlete Name:</label>
                 <input type="text" name="athlete_name" value="<?php echo $post['athlete_name']; ?>" class="form-control" required><br>
+
                 <label for="team">Team:</label>
                 <input type="text" name="team" value="<?php echo $post['team']; ?>" class="form-control" required><br>
-                <label for="sport">Sport:</label>
-                <input type="text" name="sport" value="<?php echo $post['sport']; ?>" class="form-control" required><br>
+
+                <label for="sport">Sport:</label>            
+                <select name="sport" id="sport" class="form-control">
+                    <?php
+                        foreach ($sports as $sport) {
+                            echo '<option value="' . $sport['sport_id'] . '">' . $sport['sport_name'] . '</option>';
+                        }
+                    ?>
+                </select>
+
                 <label for="bio">Bio:</label><br>
                 <textarea id = "myEditor" name="bio" rows="4"  class="form-control" required><?php echo $post['bio']; ?></textarea><br>
+
                 <input type="hidden" name="id" value="<?php echo $post_id; ?>">
+
                 <input type="submit" name="update" value="Update Post"  class="btn btn-primary">
                 <input type="submit" name="delete" value="Delete Post"  class="btn btn-danger" onclick="ConfirmDelete()">
             </form>
