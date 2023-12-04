@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if($_FILES['image_path']['name'] != null) {
         // image to be uploaded
-        $image_path= $_POST['image_path']['name'];
+        $image_path= $_FILES['image_path']['name'];
         require("fileUpload.php"); 
         $stmt = $db->prepare("INSERT INTO new_athletes (athlete_name, team, bio, image_path, sport_id) VALUES (?, ?, ?, ?, ?)");
     

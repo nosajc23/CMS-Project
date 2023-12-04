@@ -60,7 +60,7 @@ $sports = $sport_statement->fetchAll();
     <!-- Remember that alternative syntax is good and html inside php is bad -->
     <div class ="TextBoxFour container">
         <h1>Edit Athlete Page</h1>
-            <form action="processeditpost.php" method="post">
+            <form action="processeditpost.php" method="post" enctype="multipart/form-data">
                 <label for="athlete_name">Athlete Name:</label>
                 <input type="text" name="athlete_name" value="<?php echo $post['athlete_name']; ?>" class="form-control" required><br>
 
@@ -78,6 +78,8 @@ $sports = $sport_statement->fetchAll();
 
                 <label for="bio">Bio:</label><br>
                 <textarea id = "myEditor" name="bio" rows="4"  class="form-control" required><?php echo $post['bio']; ?></textarea><br>
+
+                <input type="file" name="image_path" accept=".jpg, .png, .gif, .pdf"><br>
 
                 <input type="hidden" name="id" value="<?php echo $post_id; ?>">
 
