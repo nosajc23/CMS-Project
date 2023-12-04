@@ -46,7 +46,9 @@ $athlete_datas = $athlete_statement->fetchAll();
         </div>
 
         <?php foreach ($athlete_datas as $athlete_data) :?>
-            <div> 
+            <div class="mb-3"> 
+                <br/>
+                <img src="./uploads/<?php echo $athlete_data['image_path']?>" alt="<?php echo $athlete_data['image_path']?>" class="mt-3"/>
                 <h2>Athlete name: <?php echo $athlete_data['athlete_name']; ?></h2>
                 <h3>Team: <?php echo $athlete_data['team']; ?></h3>
                 <h3>Sports Name:
@@ -72,7 +74,7 @@ $athlete_datas = $athlete_statement->fetchAll();
                     <p><?php echo date('F d, Y, h:i a', strtotime($athlete_data['created_at'])); ?></p>
                 </div>
 
-                <div class ="edit_test">
+                <div class ="edit_test mb-3">
                     <a href="edit.php?id= <?php echo $athlete_data['athlete_id']; ?>" class="btn btn-primary btn-xs">Edit</a>
                 </div>
 

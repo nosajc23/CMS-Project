@@ -71,7 +71,8 @@ echo $status;
 
             </div>
             <?php foreach ($athlete_datas as $athlete_data) :?>
-                <div> 
+                    <br/>
+                    <img src="./uploads/<?php echo $athlete_data['image_path']?>" alt="<?php echo $athlete_data['image_path']?>" class="mt-3"/>
                     <h2>Athlete name: <?php echo $athlete_data['athlete_name']; ?></h2>
                     <h3>Team: <?php echo $athlete_data['team']; ?></h3>
                     
