@@ -21,7 +21,7 @@ if (isset($_GET['search_query'])) {
     $searchQuery = '%' . $_GET['search_query'] . '%';
 
     // Search in athletes table
-    $stmt = $pdo->prepare("SELECT * FROM athletes WHERE athlete_name LIKE :query OR team LIKE :query OR bio LIKE :query");
+    $stmt = $pdo->prepare("SELECT * FROM new_athletes WHERE athlete_name LIKE :query OR team LIKE :query OR bio LIKE :query");
     $stmt->bindParam(':query', $searchQuery, PDO::PARAM_STR);
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);

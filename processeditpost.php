@@ -33,7 +33,7 @@ if ($action === 'update') {
 
 if ($action === 'delete') {
     // Query to delete the post from the database
-    $query = "DELETE FROM athletes WHERE athlete_id = :athlete_id";
+    $query = "DELETE FROM new_athletes WHERE athlete_id = :athlete_id";
     $statement = $db->prepare($query);
     $statement->bindParam(':athlete_id', $athlete_id, PDO::PARAM_INT);
     $statement->execute();
@@ -49,7 +49,7 @@ if (isset($_GET['athlete_id']) && is_numeric($_GET['athlete_id'])) {
 }
 
 // Prepare a SQL statement with placeholders
-$query = "SELECT athlete_name, team, sport, bio FROM athletes WHERE athlete_id = :athlete_id";
+$query = "SELECT athlete_name, team, sport, bio FROM new_athletes WHERE athlete_id = :athlete_id";
 $statement = $db->prepare($query);
 
 // Bind the parameter with a safe value
