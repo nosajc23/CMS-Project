@@ -35,6 +35,7 @@ $athlete_datas = $athlete_statement->fetchAll();
 
         <div id = "TextBoxOne">
             <a class="active" href="Homepage.php">Home</a>
+            <a class="active" href="admin_view_users.php">View Users</a>
             <a class="active" href="athlete_form.php">Create Post</a>    
             <a class="active" href="logout.php">Logout</a> 
             
