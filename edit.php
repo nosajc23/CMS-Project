@@ -32,10 +32,10 @@ $sports = $sport_statement->fetchAll();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link
         href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css"rel="stylesheet"type="text/css"/>
-    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="path/to/tinymce/tinymce.min.js"></script>
@@ -90,20 +90,36 @@ $sports = $sport_statement->fetchAll();
                 <input type="hidden" name="id" value="<?php echo $post_id; ?>">
 
                 <input type="submit" name="update" value="Update Post"  class="btn btn-primary">
-                <input type="submit" name="delete" value="Delete Post"  class="btn btn-danger" onclick="ConfirmDelete()">
             </form>
+            <br/>
+            <form id="deleteForm" action="delete_athlete.php" method="post">
+                <?php
+                    // Remove all non-numeric characters from $post_id
+                    $numeric_post_id = preg_replace("/[^0-9]/", "", $post_id);
+                ?>
+                <input type="hidden" name="id" value="<?php echo $numeric_post_id; ?>">
+                <input type="submit" name="delete" class="btn btn-danger" value="delete" onclick="confirmAndSubmit()">
+            </form>
+            <br/>
     </div>
 </body>
 </html>
 
 <script>
-    function ConfirmDelete()
-    {
+    function confirmAndSubmit() {
+        // Ask for confirmation
         let result = confirm("Are you sure you want to delete?");
-        if (confirm(result)==true) {
-        return true;
+
+        // If the user confirms, update the form and submit
+        if (result) {
+            // Update the name attribute
+            document.getElementById('deleteForm').elements['delete'].name = 'confirmed_delete';
+
+            // Submit the form
+            document.getElementById('deleteForm').submit();
         } else {
-        return false;
+            // If the user cancels, prevent the form submission
+            return false;
         }
     }
 </script>

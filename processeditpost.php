@@ -62,14 +62,6 @@ if ($action === 'update') {
     }
 }
 
-if ($action === 'delete') {
-    // Query to delete the post from the database
-    $query = "DELETE FROM new_athletes WHERE athlete_id = :athlete_id";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':athlete_id', $athlete_id, PDO::PARAM_INT);
-    $statement->execute();
-}
-
 header('Location: AdminPage.php'); // Redirect to the home page
 
 if (isset($_GET['athlete_id']) && is_numeric($_GET['athlete_id'])) {
