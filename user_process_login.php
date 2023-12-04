@@ -7,22 +7,15 @@
     Description: CMS Project
 
 ****************/
-session_start();
-
 // Database connection
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=serverside;', 'serveruser', 'gorgonzola7!');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
-}
+require("connect.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     // Check user credentials
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND role = 'user'");
+    $stmt = $db->prepare("SELECT * FROM users WHERE username = ? AND role = 'user'");
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
