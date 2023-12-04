@@ -61,6 +61,12 @@ $sports = $sport_statement->fetchAll();
     <div class ="TextBoxFour container">
         <h1>Edit Athlete Page</h1>
             <form action="processeditpost.php" method="post" enctype="multipart/form-data">
+                <br/>
+                <img src="./uploads/<?php echo $post['image_path']?>" alt="<?php echo $post['image_path']?>" class="mt-3"/>
+                <br/>
+                <label for="is_image_delete">Do you want to delete this image?</label>
+                <input type="checkbox" id="is_image_delete" name="is_image_delete" value="true">
+                <br/>
                 <label for="athlete_name">Athlete Name:</label>
                 <input type="text" name="athlete_name" value="<?php echo $post['athlete_name']; ?>" class="form-control" required><br>
 

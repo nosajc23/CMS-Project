@@ -36,15 +36,29 @@ if ($action === 'update') {
         $statement->execute();
         
     } else {
-        // Query to update the post in the database
-        $query = "UPDATE new_athletes SET athlete_name = :athlete_name, team = :team, bio = :bio, sport_id = :sport_id WHERE athlete_id = :athlete_id";
-        $statement = $db->prepare($query);
-        $statement->bindParam(':athlete_id', $athlete_id, PDO::PARAM_INT);
-        $statement->bindParam(':athlete_name', $athleteName);
-        $statement->bindParam(':team', $team);
-        $statement->bindParam(':sport_id', $sport_id);
-        $statement->bindParam(':bio', $bio);
-        $statement->execute();
+        if (isset($_POST['is_image_delete']) && $_POST['is_image_delete'] == 'true') {
+            // The checkbox is checked, take appropriate action
+            $query = "UPDATE new_athletes SET athlete_name = :athlete_name, team = :team, bio = :bio, sport_id = :sport_id, image_path = :image_path WHERE athlete_id = :athlete_id";
+            $statement = $db->prepare($query);
+            $statement->bindParam(':athlete_id', $athlete_id, PDO::PARAM_INT);
+            $statement->bindParam(':athlete_name', $athleteName);
+            $statement->bindParam(':team', $team);
+            $statement->bindParam(':sport_id', $sport_id);
+            $statement->bindParam(':bio', $bio);
+            $statement->bindParam(':image_path', $image_path, PDO::PARAM_NULL);
+            $statement->execute();
+        } else {
+            // Query to update the post in the database
+            $query = "UPDATE new_athletes SET athlete_name = :athlete_name, team = :team, bio = :bio, sport_id = :sport_id WHERE athlete_id = :athlete_id";
+            $statement = $db->prepare($query);
+            $statement->bindParam(':athlete_id', $athlete_id, PDO::PARAM_INT);
+            $statement->bindParam(':athlete_name', $athleteName);
+            $statement->bindParam(':team', $team);
+            $statement->bindParam(':sport_id', $sport_id);
+            $statement->bindParam(':bio', $bio);
+            $statement->execute();
+        }
+       
     }
 }
 
