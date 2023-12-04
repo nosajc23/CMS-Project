@@ -20,16 +20,13 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    
-    // Hash the password (you should use password_hash in a real-world scenario)
-   // $hashedPassword = md5($password);
 
     // Check user credentials
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ? AND role = 'user'");
-    $stmt->execute([$username, $password]);
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND role = 'user'");
+    $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($user) {
+    if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_role'] = 'user';
         header("Location: UserPage.php");

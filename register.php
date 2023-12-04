@@ -13,8 +13,8 @@ try {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $confirm_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
 
     // Check if passwords match
     if ($password !== $confirm_password) {
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insert user data into the "users" table
         $stmt = $pdo->prepare("INSERT INTO users (email, username, password, role) VALUES (?, ?, ?, 'user')");
 
-        if ($stmt->execute([$email, $username, $password])) {
+        if ($stmt->execute([$email, $username, $hashed_password])) {
             $success_message = "Registration successful. You can now log in.";
         } else {
             $error_message = "Error registering user.";
