@@ -9,12 +9,7 @@
 session_start();
 
 // Database connection
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=serverside', 'serveruser', 'gorgonzola7!');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
-}
+require("connect.php");
 
     // Process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // image to be uploaded
         $image_path= $_POST['image_path']['name'];
         require("fileUpload.php"); 
-        $stmt = $pdo->prepare("INSERT INTO new_athletes (athlete_name, team, bio, image_path, sport_id) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO new_athletes (athlete_name, team, bio, image_path, sport_id) VALUES (?, ?, ?, ?, ?)");
     
         if ($stmt->execute([$athlete, $team, $bio, $image_path, $sport_id])) {
             $success_message = "Athlete added successfully.";
@@ -37,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     } else {
         // Insert athlete data into the "athletes" table
-        $stmt = $pdo->prepare("INSERT INTO new_athletes (athlete_name, team, bio, sport_id) VALUES (?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO new_athletes (athlete_name, team, bio, sport_id) VALUES (?, ?, ?, ?)");
     
         if ($stmt->execute([$athlete, $team, $bio, $sport_id])) {
             $success_message = "Athlete added successfully.";
