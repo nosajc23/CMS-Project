@@ -10,13 +10,13 @@
 
 require('connect.php');
 
-$athlete_query = "SELECT athlete_id,athlete_name,team,sport,bio,created_at FROM new_athletes ORDER BY created_at DESC";
-$comment_query = "SELECT name, comment, timestamp FROM comments";
 
+$athlete_query = "SELECT * FROM new_athletes ORDER BY created_at DESC";
 $athlete_statement = $db->prepare($athlete_query);
 $athlete_statement->execute();
-$posts = $athlete_statement->fetchAll();
+$athlete_datas = $athlete_statement->fetchAll();
 
+$comment_query = "SELECT name, comment, timestamp FROM comments";
 $comment_statement = $db->prepare($comment_query);
 $comment_statement->execute();
 $getComments = $comment_statement->fetchAll();
@@ -70,15 +70,33 @@ echo $status;
                 </form>
 
             </div>
-            <?php foreach ($posts as $post) :?>
+            <?php foreach ($athlete_datas as $athlete_data) :?>
                 <div> 
-                    <h2>Athlete name: <?php echo $post['athlete_name']; ?></h2>
-                    <h3>Team: <?php echo $post['team']; ?></h3>
-                    <h3>Sports: <?php echo $post['sport']; ?></h3>
-                    <h4><p>Bio: <?php echo $post['bio']; ?></p></h4>
+                    <h2>Athlete name: <?php echo $athlete_data['athlete_name']; ?></h2>
+                    <h3>Team: <?php echo $athlete_data['team']; ?></h3>
+                    
+                    <h3>Sports Name:
+                        <?php
+                            $sport_id = $athlete_data['sport_id'];
+
+                            $sport_query = "SELECT * FROM sports WHERE sport_id = :sport_id";
+                            $sport_statement = $db->prepare($sport_query);
+                            $sport_statement->bindParam(':sport_id', $sport_id, PDO::PARAM_INT);
+                            $sport_statement->execute();
+                            $sport_data = $sport_statement->fetch();
+
+                            if (!empty($sport_data)) {
+                                echo htmlspecialchars($sport_data['sport_name']);
+                            } else {
+                                echo "Unknown Sport";
+                            }
+                        ?>
+                    </h3>
+                    
+                    <h4><p>Bio: <?php echo $athlete_data['bio']; ?></p></h4>
                 
                     <div class="post">
-                        <p><?php echo date('F d, Y, h:i a', strtotime($post['created_at'])); ?></p>
+                        <p><?php echo date('F d, Y, h:i a', strtotime($athlete_data['created_at'])); ?></p>
                     </div>
                        <!-- Comment Form -->
                         <form method="post" action="comment.php">
