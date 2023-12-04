@@ -9,19 +9,15 @@
 session_start();
 
 // Database connection
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=serverside', 'serveruser', 'gorgonzola7!');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Error: " . $e->getMessage());
-}
+require('connect.php');
+
 
 // Process search query
 if (isset($_GET['search_query'])) {
     $searchQuery = '%' . $_GET['search_query'] . '%';
 
     // Search in athletes table
-    $stmt = $pdo->prepare("SELECT * FROM new_athletes WHERE athlete_name LIKE :query OR team LIKE :query OR bio LIKE :query");
+    $stmt = $db->prepare("SELECT * FROM new_athletes WHERE athlete_name LIKE :query OR team LIKE :query OR bio LIKE :query");
     $stmt->bindParam(':query', $searchQuery, PDO::PARAM_STR);
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -48,6 +44,25 @@ if (isset($_GET['search_query'])) {
                 <div class="list-group-item">
                     <h5 class="mb-1"><?php echo $result['athlete_name']; ?></h5>
                     <p class="mb-1"><strong>Team:</strong> <?php echo $result['team']; ?></p>
+                    <p class="mb-1">
+                        <strong>Sports Name:</strong>
+                        <!-- <?php echo $result['sport_id']; ?> -->
+                        <?php
+                            $sport_id = $result['sport_id'];
+
+                            $sport_query = "SELECT * FROM sports WHERE sport_id = :sport_id";
+                            $sport_statement = $db->prepare($sport_query);
+                            $sport_statement->bindParam(':sport_id', $sport_id, PDO::PARAM_INT);
+                            $sport_statement->execute();
+                            $sport_data = $sport_statement->fetch();
+
+                            if (!empty($sport_data)) {
+                                echo htmlspecialchars($sport_data['sport_name']);
+                            } else {
+                                echo "Unknown Sport";
+                            }
+                        ?>
+                    </p>
                     <p class="mb-1"><strong>Bio:</strong> <?php echo $result['bio']; ?></p>
                 </div>
             <?php endforeach; ?>
